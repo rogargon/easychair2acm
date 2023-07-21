@@ -1,50 +1,51 @@
 # easychair2acm
-Python script to convert easy chair conference data to ACM processing metadata requirements
 
-EasyChair is a conference management system  https://easychair.org with >21millon accesses per month
+Python script to convert easy chair conference data to ACM processing metadata requirements,
+concretely ACM e-Rights system CSV format 2023, as detailed in 
+[https://www.acm.org/publications/gi-proceedings-current]().
 
-ACM Association for Computing Machinery https://www.acm.org is a 72 years old scientific organization with over 100,000 members and a major customer of easychair.
+EasyChair is a conference management system  https://easychair.org with >21 million accesses per month.
 
-This python script is for conference program chairs who want to automatically convert author, sumbission data into the following ACM publishing process' metadata format,
+ACM Association for Computing Machinery https://www.acm.org is a 72 years old scientific organization 
+with over 100,000 members and a major customer of easychair.
 
-content type - full paper, short paper, or abstract
+This python script is for conference program chairs who want to automatically convert author and submission data 
+into the CSV format expected by the ACM e-Rights system:
 
->>>>>>>>>>>>>>>>
-title
-
-author / affiliation list. Authors and affiliations are separated by semi-colons, with affiliations in parentheses:
-  Alan Smithie (University of Lanark);Hamilton Armstrong (Woodpark University)
-
-email list. E-mail addresses are in the same order as authors and separated by semi-colons:
-  a.smithie@gmail.com;h.armstrong@outlook.com
-
-submission ID
-<<<<<<<<<<<<<<<<
+| proceedingID | event_tracking_number/theirnumber | paper_type   | theTitle                                   | prefix | first_name | middle_name | last_name  | suffix | author_sequence_no | contact_author | ACM_profile_id | ACM_client_no | orcid               | email                           | department_school_lab                         | institution / AFFILIATION                   | city            | state_province | country | secondary_department_school_lab     | secondary_institution | secondary_city | secondary_state_province | secondary_country | section_title     | section_seq_no | published_article_number | start_page | end_page | article_seq_no | art_submission_date | art_approval_date | source (submission system) | abstract                 |
+|--------------|-----------------------------------|--------------|--------------------------------------------|--------|------------|-------------|------------|--------|--------------------|----------------|----------------|---------------|---------------------|---------------------------------|-----------------------------------------------|---------------------------------------------|-----------------|----------------|---------|-------------------------------------|-----------------------|----------------|--------------------------|-------------------|-------------------|----------------|--------------------------|------------|----------|----------------|---------------------|-------------------|----------------------------|--------------------------|
+| 108XX        | art_1                             | Full Paper   | Essentials of Ancient Hardware Engineering | Dr.    | Kevin      | J.          | Bacon      | Jr.    | 2                  | no             |                |               |                     | kjbacon@google.com              | Department of Library and Information Science | University of Michigan                      | Ann Arbor       | MI             | USA     | Department of Communications        | University of Chicago | Chicago        |                          | USA               | System Management | 3              | 5                        | 1          | 5        | 7              | 7/1/2021            | 10/23/2021        | Craig Rodkin               | Enter your abstract here |
+| 108XX        | art_1                             | Full Paper   | Essentials of Ancient Hardware Engineering | Mr.    | Jon        | M.          | Bon Jovi   |        | 1                  | yes            |                |               |                     | jbj@rutgers.edu                 | Department of Anthropology and Social Science | Rutgers, The State University of New Jersey | Newark          | NJ             | USA     |                                     |                       |                |                          |                   | System Management | 3              | 5                        | 1          | 5        | 7              | 7/1/2021            | 10/23/2021        | Craig Rodkin               | Enter your abstract here |
+| 108XX        | art_1                             | Full Paper   | Essentials of Ancient Hardware Engineering | Dr.    | Kevin      |             | Costner    | III    | 3                  | no             |                |               |                     | kev_cos@yahoo.com               |                                               | INRIA                                       | Paris           |                | France  |                                     |                       |                |                          |                   | System Management | 3              | 5                        | 1          | 5        | 7              | 7/1/2021            | 10/23/2021        | Craig Rodkin               | Enter your abstract here |
+| 108XX        | art_2                             | Invited Talk | Generating Traffic Data                    |        | Nicholas   |             | Carter     |        | 1                  | no             | 90000001026    |               | 1234-9876           | nicholas_carter@utoronto.edu.ca |                                               | University of Toronto                       | Toronto         |                | Canada  |                                     |                       |                |                          |                   | Event Reports     | 1              | 12                       | 1          | 23       | 14             | 5/13/2021           | 10/23/2021        | Craig Rodkin               |                          |
+| 108XX        | art_2                             | Invited Talk | Generating Traffic Data                    |        | Kevin      |             | Richardson |        | 2                  | yes            |                |               |                     | krichardson@nsu.edu             |                                               | Nova Southeastern University                | Fort Lauderdale | FL             | USA     | Department of Science & Engineering | Ave Maria University  | Ave Maria      | FL                       | USA               | Event Reports     | 1              | 12                       | 1          | 23       | 14             | 5/13/2021           | 10/23/2021        | Craig Rodkin               |                          |
+| 108XX        | art_3                             | Poster       | Sample Poster Title                        |        | Craig      | Barry       | Rodkin     |        | 2                  | no             |                |               |                     | rodkin@hq.acm.org               | Publications Dpt.                             | ACM                                         | NY              | NY             | USA     |                                     | SFDS                  | Belle Harbor   | NY                       |                   | Fake Section      | 2              |                          | 234        | 242      | 10             | 6/29/2021           | 10/23/2021        | Craig Rodkin               | Sample Abstract 1        |
+| 108XX        | art_3                             | Poster       | Sample Poster Title                        |        | Anna       |             | Lacson     |        | 1                  | no             |                |               |                     | lacson@hq.acm.org               |                                               | ACM                                         | New York        | New York       |         |                                     |                       |                |                          |                   | Fake Section      | 2              |                          | 234        | 242      | 10             | 6/29/2021           | 10/23/2021        | Craig Rodkin               | Sample Abstract 1        |
+| 108XX        | art_3                             | Poster       | Sample Poster Title                        |        | Laura      | L.          | Lander     |        | 3                  | yes            | 90000001099    |               | 0000-0001-6769-7867 | lander@hq.acm.org               |                                               | ACM                                         | New York        | NY             | USA     |                                     |                       |                |                          |                   | Fake Section      | 2              |                          | 234        | 242      | 10             | 6/29/2021           | 10/23/2021        | Craig Rodkin               | Sample Abstract 1        |
+| 108XX        | art_4                             | Poster       | Sample Poster Title222                     |        | Craig      | B           | Rodkin     |        | 2                  | no             | 90000001088    |               | 0000-0001-9999-9999 | rodkin@hq.acm.org               | Publications Dpt.                             | ACM                                         | NY              | NY             | USA     |                                     | SFDS                  | Belle Harbor   | NY                       |                   | Fake Section      | 1              |                          | 243        | 251      | 11             | 6/14/2021           | 10/23/2021        | Craig Rodkin               | sample abstract 2        |
+| 108XX        | art_4                             | Poster       | Sample Poster Title222                     |        | Anna       |             | Lacson     |        | 1                  | yes            |                |               |                     | lacson@hq.acm.org               |                                               | ACM                                         | New York        | New York       |         |                                     |                       |                |                          |                   | Fake Section      | 1              |                          | 243        | 251      | 11             | 6/14/2021           | 10/23/2021        | Craig Rodkin               | sample abstract 2        |
+| 108XX        | art_5                             | Poster       | Sample Poster Title3333                    |        | Laura      | Linda       | Lander     |        | 1                  | yes            | 900000010      |               | 0000-0001-6769-7867 | lander@hq.acm.org               |                                               | ACM                                         | New York        | NY             | USA     | Dept. of infrastructure             | NSF                   | Los Angeles    | CA                       | USA               | Fake Section      | 3              |                          | 252        | 260      | 12             | 5/21/2021           | 10/19/2021        | Craig Rodkin               | sample abstract 3        |
 
 Without having to pour through all author and submission data manually.
 
+**IMPORTANT**: the `paper_type` is fixed to "Full Paper" for all submissions. This field has to be adjusted manually 
+following the instructions at [https://www.acm.org/binaries/content/assets/publications/taps/papertypes-csvfields-current.pdf]().
 
-Steps:
+## Steps
 
-1 - In chair role, click administration tab, then conference data download the xls data file
+1. In chair role, click the `Premium` tab and then `Conference data download`.
+2. Click the link corresponding to `If you would like to view which tables are included in the CSV data, or download only a subset of these tables`.
+3. Select the tables `submission` and `author` and download them.
+4. Extract the accepted articles from the `submission.csv` file and copy them to a file named `accepted.csv` 
+in the same directory as the `easychair2acm.py` script.
+5. Copy the `author.csv` file to `authors.csv` in the same directory as before.
+6. Run `python easychair2acm.py` to get the output in `output_acm.csv`.
 
-2 - In excel or other, export the Submissions sheet with accepted articles to accepted.csv
-
-3 - In excel or other, export the Authors sheet to authors.csv
-
-4 - Run easychair2acm.py > myconference.acm.metadata
-
-
-Author name matching automates processing the combined author list sentence, into separated metadata per author, crosschecked with the author database.
-
-
-Friends of easychair2acm
-
-https://github.com/alexorso/easychairscripts
-https://github.com/nblomqvist/easy2acl
-
+## License
 
 MIT License
+
+Copyright 2023 rogargon
 
 Copyright 2019 farpeek
 
@@ -53,4 +54,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
