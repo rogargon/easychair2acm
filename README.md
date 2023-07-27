@@ -2,7 +2,7 @@
 
 Python script to convert easy chair conference data to ACM processing metadata requirements,
 concretely ACM e-Rights system CSV format 2023, as detailed in 
-[https://www.acm.org/publications/gi-proceedings-current]().
+https://www.acm.org/publications/gi-proceedings-current.
 
 EasyChair is a conference management system  https://easychair.org with >21 million accesses per month.
 
